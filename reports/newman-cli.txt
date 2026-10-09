@@ -1,0 +1,83 @@
+newman
+
+Lab07 - JSONPlaceholder API Tests
+
+→ 01 GET - Lấy danh sách posts
+  GET http://localhost:3000/posts [200 OK, 2.9kB, 39ms]
+  ✓  Status 200
+  ✓  Body là mảng không rỗng
+  ✓  Mỗi post có đủ userId, id, title, body
+  ✓  Thời gian phản hồi < 1000ms
+
+→ 02 GET - Lấy post theo id
+  GET http://localhost:3000/posts/1 [200 OK, 478B, 8ms]
+  ✓  Status 200
+  ✓  id = 1
+  ✓  Content-Type là JSON
+  ✓  Thời gian phản hồi < 1000ms
+
+→ 03 GET - Lọc posts theo userId
+  GET http://localhost:3000/posts?userId=1 [200 OK, 884B, 7ms]
+  ✓  Status 200
+  ✓  Tất cả post thuộc userId = 1
+  ✓  Thời gian phản hồi < 1000ms
+
+→ 04 GET - Lấy comments của một post
+  GET http://localhost:3000/posts/1/comments [200 OK, 825B, 8ms]
+  ✓  Status 200
+  ✓  Tất cả comment thuộc postId = 1
+  ✓  Thời gian phản hồi < 1000ms
+
+→ 05 POST - Tạo post mới
+  POST http://localhost:3000/posts [201 Created, 609B, 18ms]
+  ✓  Status 201 Created
+  ✓  Dữ liệu trả về khớp dữ liệu gửi
+  ✓  Server cấp id mới
+  ✓  Thời gian phản hồi < 1000ms
+
+→ 06 PUT - Cập nhật toàn bộ post
+  PUT http://localhost:3000/posts/1 [200 OK, 496B, 7ms]
+  ✓  Status 200
+  ✓  Title đã được cập nhật
+  ✓  Thời gian phản hồi < 1000ms
+
+→ 07 PATCH - Cập nhật một phần
+  PATCH http://localhost:3000/posts/1 [200 OK, 490B, 9ms]
+  ✓  Status 200
+  ✓  Chỉ title thay đổi, id giữ nguyên
+  ✓  Thời gian phản hồi < 1000ms
+
+→ 08 DELETE - Xoá post vừa tạo
+  DELETE http://localhost:3000/posts/26 [200 OK, 395B, 14ms]
+  ✓  Status 200
+  ✓  Thời gian phản hồi < 1000ms
+
+→ 09 GET - Post đã xoá trả về 404 (negative test)
+  GET http://localhost:3000/posts/26 [404 Not Found, 402B, 8ms]
+  ✓  Status 404 Not Found
+  ✓  Thời gian phản hồi < 1000ms
+
+→ 10 GET - id không tồn tại trả về 404
+  GET http://localhost:3000/posts/99999 [404 Not Found, 402B, 6ms]
+  ✓  Status 404 Not Found
+  ✓  Thời gian phản hồi < 1000ms
+
+┌─────────────────────────┬──────────────────┬─────────────────┐
+│                         │         executed │          failed │
+├─────────────────────────┼──────────────────┼─────────────────┤
+│              iterations │                1 │               0 │
+├─────────────────────────┼──────────────────┼─────────────────┤
+│                requests │               10 │               0 │
+├─────────────────────────┼──────────────────┼─────────────────┤
+│            test-scripts │               10 │               0 │
+├─────────────────────────┼──────────────────┼─────────────────┤
+│      prerequest-scripts │                0 │               0 │
+├─────────────────────────┼──────────────────┼─────────────────┤
+│              assertions │               30 │               0 │
+├─────────────────────────┴──────────────────┴─────────────────┤
+│ total run duration: 327ms                                    │
+├──────────────────────────────────────────────────────────────┤
+│ total data received: 3.78kB (approx)                         │
+├──────────────────────────────────────────────────────────────┤
+│ average response time: 12ms [min: 6ms, max: 39ms, s.d.: 9ms] │
+└──────────────────────────────────────────────────────────────┘
